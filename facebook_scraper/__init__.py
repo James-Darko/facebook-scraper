@@ -14,8 +14,14 @@ from .facebook_scraper import FacebookScraper
 from .fb_types import Credentials, Post, RawPost
 from .utils import html_element_to_string, parse_cookie_file
 
+kwargs = {
+    "proxies": {
+         "http": os.getenv("http_proxy"),
+         "https": os.getenv("https_proxy")
+    }
+}
 
-_scraper = FacebookScraper()
+_scraper = FacebookScraper(requests_kwargs=kwargs)
 
 
 def get_posts(
